@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #020008;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
+
+#canvas-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#sparkle-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Mensaje de instrucción */
+#instruction {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  z-index: 3;
+  pointer-events: none;
+  text-shadow: 0 0 10px #ff77c6, 0 0 20px #ff77c6;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Polvo de estrellas al mover el cursor o tocar */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffffff 0%, #ff80df 60%, transparent 100%);
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 10px #ff60bf, 0 0 20px #80dfff;
+  animation: fadeOut 1s linear forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(0.2) translateY(-20px); }
+}
+
+/* Modal Emergente de Mensaje de Amor */
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 0, 15, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 182, 217, 0.5);
+  padding: 30px 25px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 85%;
+  width: 380px;
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
+  transform: scale(0.8);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal:not(.hidden) .modal-content {
+  transform: scale(1);
+}
+
+.star-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+#modal-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 500;
+  text-shadow: 0 0 8px rgba(255, 182, 217, 0.8);
+}
+
+#close-btn {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 1.8rem;
+  color: #ffb6d9;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+#close-btn:hover {
+  color: #ffffff;
+}
